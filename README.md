@@ -1,26 +1,16 @@
-# OpenInPtyxis
+# OpenInFoot
 
-UNMAINTAINED - I NO LONGER HAVE ANY NEED TO MAINTAIN THIS, HOWEVER I'LL MERGE PR'S THAT HELP OUT THE COMMUNITY
-
-<p>Simple script to open my favorite terminal <a href="https://gitlab.gnome.org/chergert/ptyxis">Ptyxis</a> from Nautilus (Gnome Files) Menu</p>
+<p>Simple script to open my favorite terminal <a href="https://gitlab.gnome.org/chergert/ptyxis">Foot</a> from Nautilus (Gnome Files) Menu</p>
 
 ## Dependency
-`nautilus-python`( `python-nautilus` on Debian/Ubuntu based)
-### Ubuntu
-```
-sudo apt install python3-nautilus
-```
-### Fedora
-```
-sudo dnf install nautilus-python
-```
+`nautilus-python`(or `python-nautilus`. Check your distribution)
 
 ## Installation
 
 ### Arch Linux
 Install from AUR
 ```
-yay -S nautilus-open-in-ptyxis
+paru -S nautilus-open-in-ptyxis
 ```
 Restart Nautilus
 ```
@@ -31,7 +21,7 @@ nautilus -q
 
 Clone this repository and use the install script.
 ```
-git clone https://github.com/GustavoWidman/nautilus-open-in-ptyxis.git
-cd nautilus-open-in-ptyxis
+git clone https://github.com/adjamhub/nautilus-open-in-foot.git
+cd nautilus-open-in-foot
 sudo ./install.sh
 ```
