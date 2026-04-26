@@ -12,7 +12,7 @@ except ValueError:
 
 require_version("Gtk", "4.0")
 
-TERMINAL_NAME = "app.devsuite.Ptyxis"
+TERMINAL_NAME = "foot"
 
 import logging
 import os
@@ -20,11 +20,11 @@ from gettext import gettext
 
 from gi.repository import GObject, Nautilus
 
-if os.environ.get("NAUTILUS_PTYXIS_DEBUG", "False") == "True":
+if os.environ.get("NAUTILUS_FOOT_DEBUG", "False") == "True":
     logging.basicConfig(level=logging.DEBUG)
 
 
-class PtyxisNautilus(GObject.GObject, Nautilus.MenuProvider):
+class FootNautilus(GObject.GObject, Nautilus.MenuProvider):
     def __init__(self):
         super().__init__()
         self.is_select = False
@@ -72,12 +72,12 @@ class PtyxisNautilus(GObject.GObject, Nautilus.MenuProvider):
         return menu
 
     def _create_nautilus_item(self, dir_path: str) -> Nautilus.MenuItem:
-        """Creates the 'Open In Ptyxis' menu item."""
+        """Creates the 'Open In Foot' menu item."""
 
         item = Nautilus.MenuItem(
-            name="PtyxisNautilus::open_in_ptyxis",
-            label=gettext("Open in Ptyxis"),
-            tip=gettext("Open this folder/file in Ptyxis Terminal"),
+            name="FootNautilus::open_in_foot",
+            label=gettext("Open in Foot"),
+            tip=gettext("Open this folder/file in Foot Terminal"),
         )
         logging.debug(f"Created item with path {dir_path}")
 
@@ -87,25 +87,20 @@ class PtyxisNautilus(GObject.GObject, Nautilus.MenuProvider):
         return item
 
     def is_native(self):
-        which = shutil.which("ptyxis-terminal") 
-        if which == "/usr/bin/ptyxis-terminal" or which == "/usr/local/bin/ptyxis-terminal":
-            return "ptyxis-terminal"
-        which = shutil.which("ptyxis") 
-        if which == "/usr/bin/ptyxis" or which == "/usr/local/bin/ptyxis":
-            return "ptyxis"
+        which = shutil.which("foot") 
+        if which == "/usr/bin/foot" or which == "/usr/local/bin/foot":
+            return "foot"
 
     def _nautilus_run(self, menu, path):
-        """'Open with Ptyxis's menu item callback."""
+        """'Open with Foot's menu item callback."""
         native = self.is_native()
         logging.debug("Calling command:", native)
         logging.debug("Opening path:", path)
         args = None
-        if native == "ptyxis-terminal":
-            args = ["ptyxis-terminal", "--new-window", "-s", "-d", path]
-        elif native =="ptyxis":
-            args = ["ptyxis", "--new-window", "-s", "-d", path]
+        elif native =="foot":
+            args = ["foot", "-D", path]
         else:
-            args = ["/usr/bin/flatpak", "run", TERMINAL_NAME, "--new-window", "-s", "-d", path]
+            args = ["/usr/bin/flatpak", "run", TERMINAL_NAME, "-D", path]
 
         subprocess.Popen(args, cwd=path)
 
