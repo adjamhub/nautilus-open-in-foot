@@ -97,7 +97,7 @@ class FootNautilus(GObject.GObject, Nautilus.MenuProvider):
         logging.debug("Calling command:", native)
         logging.debug("Opening path:", path)
         args = None
-        elif native =="foot":
+        if native =="foot":
             args = ["foot", "-D", path]
         else:
             args = ["/usr/bin/flatpak", "run", TERMINAL_NAME, "-D", path]
